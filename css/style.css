@@ -17,6 +17,9 @@
 main{
   font-family: Helvetica;
 }
-
+.bg-purple2 {
+  color: white!important;
+  background: linear-gradient(135deg, #37315e, rgb(64, 29, 186))!important;
+}
   
 
