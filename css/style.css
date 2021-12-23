@@ -3,23 +3,23 @@
   border-bottom: 2px solid #e5e5e5;
 }
 
-.navbar-brand {
-    font-family: 'Poppins', sans-serif;
+.navbar-brand p{
+  /* font-family: 'Nunito', sans-serif; 
+  font-family: 'Open Sans', sans-serif; */
+  font-family: 'Armata', sans-serif; 
 }
 
-  /* color: #999; */
+/* .main-style{
+  font-family: 'Open Sans', sans-serif;
+}   */
 
+/* color: #999; */
 .bg-purple {
     color: white!important;
     background: #37315e;
 }
 
-body{
-  font-family: Helvetica;
-}
 .bg-purple2 {
   color: white!important;
   background: linear-gradient(135deg, #37315e, rgb(64, 29, 186))!important;
-}
-  
-
+} 
