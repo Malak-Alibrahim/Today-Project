@@ -12,12 +12,13 @@ const newsButton = document.getElementById("newsButton");
 const newsInput = document.getElementById("newsInput");
 const generalButton = document.getElementById("generalButton");
 const businessButton = document.getElementById("businessButton");
-const scienceeButton = document.getElementById("scienceButton");
+const scienceButton = document.getElementById("scienceButton");
 const technologyButton = document.getElementById("technologyButton");
 const healthButton = document.getElementById("healthButton");
 const entertainmentButton = document.getElementById("entertainmentButton");
 const sportsButton = document.getElementById("sportsButton");
 
+// navbar buttons
 generalButton.addEventListener("click", (e) => {
   e.preventDefault();
   const api = `https://newsapi.org/v2/top-headlines?category=General&country=sa&pageSize=6&page=${currentPage}&sortBy=popularity&language=en&apiKey=${newsKey}`;
@@ -103,12 +104,13 @@ sportsButton.addEventListener("click", (e) => {
 
 });
 
+// search news button
 newsButton.addEventListener("click", (e) => {
   e.preventDefault();
   getNews(newsInput.value);
   newsInput.value = "";
 });
-
+// search for specific news entred by user 
 const getNews = async (newsInput) => {
   try {
     const response = await fetch(
@@ -155,6 +157,7 @@ const getNews = async (newsInput) => {
   }
 };
 
+// go to next page
 next.addEventListener("click", ()=>{
   if (nextPage<=totalPages){
     nextPage++;
@@ -171,6 +174,7 @@ next.addEventListener("click", ()=>{
     });
   }
 });
+// back to previous page
 prev.addEventListener("click", ()=>{
   if (prevPage>0){
     nextPage--;
@@ -189,6 +193,7 @@ prev.addEventListener("click", ()=>{
   }
 });
 
+// display news on the cards
 function displayNews(data) {
   let latestNews = data.articles;
   document.getElementById("news").innerHTML = latestNews.map(
@@ -226,6 +231,7 @@ function displayNews(data) {
   //console.log(data.articles[0].source.category);
 };
 
+//display news once user open the page
 window.addEventListener("load", () => {
   const api = `https://newsapi.org/v2/top-headlines?category=General&country=sa&pageSize=6&page=${currentPage}&sortBy=popularity&language=en&apiKey=${newsKey}`;
   fetch(api)
