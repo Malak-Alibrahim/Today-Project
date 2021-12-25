@@ -4,7 +4,7 @@ let lon;
 let key = "a831eca6f4ec47aa8b3c8e4219d4c64d";
 let city = document.querySelector(".city");
 let time = document.querySelector(".time");
-let tempValue = document.querySelector(".value");
+let tempValue = document.querySelector(".temp");
 let tempDescription = document.querySelector(".description");
 let weatherIcon = document.querySelector(".weather-icon-img");
 const weatherButton = document.getElementById("weatherButton");

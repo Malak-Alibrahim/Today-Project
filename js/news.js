@@ -1,5 +1,4 @@
 let newsKey = "2c8d68bb18964fdaa2cb225dd8448168";
-
 let prevPage = 0;
 let currentPage = 1;
 let nextPage = 2;
@@ -13,7 +12,7 @@ const newsInput = document.getElementById("newsInput");
 const mainNav = document.getElementById("nav").children;
 const mainNavArray = [...mainNav];
 
-// fetch news depends on category selected by user on navbar
+// Fetch news depends on category selected by user on navbar
 mainNavArray.map((item) => {
   item.addEventListener("click", (e) => {
     e.preventDefault();
@@ -30,13 +29,13 @@ mainNavArray.map((item) => {
   });
 });
 
-// search news button
+// Search news button
 newsButton.addEventListener("click", (e) => {
   e.preventDefault();
   getNews(newsInput.value);
   newsInput.value = "";
 });
-// search for specific news entred by user
+// Search for specific news entred by user
 const getNews = async (newsInput) => {
   try {
     const response = await fetch(
@@ -83,7 +82,7 @@ const getNews = async (newsInput) => {
   }
 };
 // ternary operator
-// go to next page
+// Go to next page
 next.addEventListener("click", () => {
   if (nextPage <= totalPages) {
     nextPage++;
@@ -102,7 +101,7 @@ next.addEventListener("click", () => {
       });
   }
 });
-// back to previous page
+// Back to previous page
 prev.addEventListener("click", () => {
   if (prevPage > 0) {
     nextPage--;
@@ -122,7 +121,7 @@ prev.addEventListener("click", () => {
   }
 });
 
-// display news on the cards
+// Display news on the cards
 function displayNews(data) {
   let latestNews = data.articles;
   document.getElementById("news").innerHTML = latestNews.map(
@@ -160,7 +159,7 @@ function displayNews(data) {
   //console.log(data.articles[0].source.category);
 }
 
-//display news once user open the page
+//Display news once user open the page
 window.addEventListener("load", () => {
   const api = `https://newsapi.org/v2/top-headlines?category=General&country=sa&pageSize=6&page=${currentPage}&sortBy=popularity&language=en&apiKey=${newsKey}`;
   fetch(api)
