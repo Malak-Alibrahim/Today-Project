@@ -7,101 +7,27 @@ let totalPages = 15;
 let prev = document.getElementById("prev");
 let current = document.getElementById("current");
 let next = document.getElementById("next");
-
+let currentCategory = "";
 const newsButton = document.getElementById("newsButton");
 const newsInput = document.getElementById("newsInput");
-const generalButton = document.getElementById("generalButton");
-const businessButton = document.getElementById("businessButton");
-const scienceButton = document.getElementById("scienceButton");
-const technologyButton = document.getElementById("technologyButton");
-const healthButton = document.getElementById("healthButton");
-const entertainmentButton = document.getElementById("entertainmentButton");
-const sportsButton = document.getElementById("sportsButton");
+const mainNav = document.getElementById("nav").children;
+const mainNavArray = [...mainNav];
 
-// navbar buttons
-generalButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  const api = `https://newsapi.org/v2/top-headlines?category=General&country=sa&pageSize=6&page=${currentPage}&sortBy=popularity&language=en&apiKey=${newsKey}`;
-  fetch(api)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      displayNews(data);
-    });
-});
-businessButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  const api = `https://newsapi.org/v2/top-headlines?category=business&pageSize=6&page=${currentPage}&language=en&apiKey=${newsKey}`;
-
-  fetch(api)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      displayNews(data);
-    });
-});
-scienceButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  const api = `https://newsapi.org/v2/top-headlines?category=science&pageSize=6&page=${currentPage}&language=en&apiKey=${newsKey}`;
-
-  fetch(api)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      displayNews(data);
-    });
-});
-technologyButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  const api = `https://newsapi.org/v2/top-headlines?category=technology&pageSize=6&page=${currentPage}&language=en&apiKey=${newsKey}`;
-
-  fetch(api)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      displayNews(data);
-    });
-});
-healthButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  const api = `https://newsapi.org/v2/top-headlines?category=health&pageSize=6&page=${currentPage}&language=en&apiKey=${newsKey}`;
-
-  fetch(api)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      displayNews(data);
-    });
-});
-entertainmentButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  const api = `https://newsapi.org/v2/top-headlines?category=entertainment&pageSize=6&page=${currentPage}&language=en&apiKey=${newsKey}`;
-
-  fetch(api)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      displayNews(data);
-    });
-});
-sportsButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  const api = `https://newsapi.org/v2/top-headlines?category=sports&pageSize=6&page=${currentPage}&language=en&apiKey=${newsKey}`;
-
-  fetch(api)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      displayNews(data);
-    });
-
+// fetch news depends on category selected by user on navbar
+mainNavArray.map((item) => {
+  item.addEventListener("click", (e) => {
+    e.preventDefault();
+    const id = item.id;
+    const api = `https://newsapi.org/v2/top-headlines?category=${id}&pageSize=6&page=${currentPage}&language=en&apiKey=${newsKey}`;
+    currentCategory = e.target.id;
+    fetch(api)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        displayNews(data);
+      });
+  });
 });
 
 // search news button
@@ -110,7 +36,7 @@ newsButton.addEventListener("click", (e) => {
   getNews(newsInput.value);
   newsInput.value = "";
 });
-// search for specific news entred by user 
+// search for specific news entred by user
 const getNews = async (newsInput) => {
   try {
     const response = await fetch(
@@ -156,40 +82,43 @@ const getNews = async (newsInput) => {
     alert("No news found about " + newsInput);
   }
 };
-
+// ternary operator
 // go to next page
-next.addEventListener("click", ()=>{
-  if (nextPage<=totalPages){
+next.addEventListener("click", () => {
+  if (nextPage <= totalPages) {
     nextPage++;
     prevPage++;
     currentPage++;
-    // need to fix the category
-    urlNext =`https://newsapi.org/v2/top-headlines?&country=sa&pageSize=6&page=${currentPage}&sortBy=popularity&language=en&apiKey=${newsKey}`;
+    // fetch depends on category
+    urlNext = `https://newsapi.org/v2/top-headlines?&${
+      currentCategory ? "category=" + currentCategory + "&" : ""
+    }country=sa&pageSize=6&page=${currentPage}&sortBy=popularity&language=en&apiKey=${newsKey}`;
     fetch(urlNext)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      displayNews(data);
-    });
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        displayNews(data);
+      });
   }
 });
 // back to previous page
-prev.addEventListener("click", ()=>{
-  if (prevPage>0){
+prev.addEventListener("click", () => {
+  if (prevPage > 0) {
     nextPage--;
     prevPage--;
     currentPage--;
-    // need to fix the category
-    urlPrev =`https://newsapi.org/v2/top-headlines?&country=sa&pageSize=6&page=${currentPage}&sortBy=popularity&language=en&apiKey=${newsKey}`;
+    // fetch depends on category
+    urlPrev = `https://newsapi.org/v2/top-headlines?&${
+      currentCategory ? "category=" + currentCategory + "&" : ""
+    }country=sa&pageSize=6&page=${currentPage}&sortBy=popularity&language=en&apiKey=${newsKey}`;
     fetch(urlPrev)
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      displayNews(data);
-    });
-
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        displayNews(data);
+      });
   }
 });
 
@@ -229,7 +158,7 @@ function displayNews(data) {
       `
   );
   //console.log(data.articles[0].source.category);
-};
+}
 
 //display news once user open the page
 window.addEventListener("load", () => {
