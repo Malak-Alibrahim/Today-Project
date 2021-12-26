@@ -1,4 +1,4 @@
-let newsKey = "2c8d68bb18964fdaa2cb225dd8448168";
+let newsKey = "236f287877064d52a99e54b54f6d6cbe";
 let prevPage = 0;
 let currentPage = 1;
 let nextPage = 2;
@@ -39,7 +39,7 @@ newsButton.addEventListener("click", (e) => {
 const getNews = async (newsInput) => {
   try {
     const response = await fetch(
-      `https://newsapi.org/v2/everything?q=${newsInput}&from=2021-12-23&pageSize=6&page=${currentPage}&apiKey=${newsKey}`
+      `https://newsapi.org/v2/everything?q=${newsInput}&from=2021-12-24&pageSize=6&page=${currentPage}&apiKey=${newsKey}`
     );
     const newsData = await response.json();
     console.log(newsData);
@@ -56,7 +56,7 @@ const getNews = async (newsInput) => {
               src="${element.urlToImage}"
               class="img-fluid mx-auto d-block"
               max-width: 100%; height: auto;
-              alt="..."
+              alt="image not found"
             />
           </div>
           <div class="col-8">
@@ -156,7 +156,7 @@ function displayNews(data) {
       </div>
       `
   );
-  //console.log(data.articles[0].source.category);
+  //console.log(latestNews);
 }
 
 //Display news once user open the page
