@@ -28,7 +28,7 @@ Today's Project is a website that shows you today's news around the world and ca
 <img src="img/screencapture.png">
 
 ### The Today News  Demo
-You can visit Today News website [link here]()
+You can visit Today News website [link here](https://today-news-malak-alibrahim.netlify.app/)
 
 ## Future Features:
 - Make the website in a different language and allow the user to select the website language.

@@ -46,7 +46,6 @@ next.addEventListener("click", () => {
       .then((data) => {
         displayNews(data);
       });
-      
   }
 });
 // Back to previous page
@@ -169,5 +168,5 @@ window.addEventListener("load", () => {
     })
     .then((data) => {
       displayNews(data);
-    });    
+    });
 });
